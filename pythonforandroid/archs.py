@@ -143,12 +143,10 @@ class Arch:
         env['LDFLAGS'] = (
             ' '
             + " ".join(
-                [
-                    "-L'"
+                "-L'"
                     + l.replace("'", "'\"'\"'")
                     + "'"  # no shlex.quote in py2
                     for l in self.extra_global_link_paths
-                ]
             )
             + ' ' + ' '.join(self.common_ldflags).format(
                 ctx_libs_dir=self.ctx.get_libs_dir(self.arch)
