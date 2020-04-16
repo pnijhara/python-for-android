@@ -894,7 +894,9 @@ def biglink(ctx, arch):
             env=env)
 
 
-def biglink_function(soname, objs_paths, extra_link_dirs=[], env=None):
+def biglink_function(soname, objs_paths, extra_link_dirs=None, env=None):
+    if extra_link_dirs is None:
+        extra_link_dirs = []
     print('objs_paths are', objs_paths)
     sofiles = []
 
@@ -941,7 +943,9 @@ def biglink_function(soname, objs_paths, extra_link_dirs=[], env=None):
     shprint(cc, '-shared', '-O3', '-o', soname, *unique_args, _env=env)
 
 
-def copylibs_function(soname, objs_paths, extra_link_dirs=[], env=None):
+def copylibs_function(soname, objs_paths, extra_link_dirs=None, env=None):
+    if extra_link_dirs is None:
+        extra_link_dirs = []
     print('objs_paths are', objs_paths)
 
     re_needso = re.compile(r'^.*\(NEEDED\)\s+Shared library: \[lib(.*)\.so\]\s*$')
